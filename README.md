@@ -1,6 +1,4 @@
-# MasterThesis
-
-Master thesis on continuous time representation in signal decoding tasks.
+# Continuous-in-time representation of evoked potentials
 
 ## Abstract
 
@@ -14,17 +12,9 @@ function. This approach is relevant for signals from various wearable devices:
 accelerometers, heart rate monitors, devices for picking up brain signals such as
 electroencephalograms or electrocorticograms.
 
-The main result of this work is an algorithm which allows us to work with a signal as if
-it was a continuous function. We also look at different applications of this algorithm and
-propose to do further research on expanding the continuity of time to the continuity of
-space.
+The main result of this work is a comparison of convolutional and differential approaches 
+to solving P300-paradigm signal decoding task while having regular and irregular time series.
 
 ## Text
 
-The full text of the thesis can be found
-[here](https://www.overleaf.com/read/rjvmxvkmgvyg)
-
-## Experiments
-
-For now it's all in the notebook, soon the training and visualizing would be done through
-CLI (work in progress)
+TBD
