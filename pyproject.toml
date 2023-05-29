@@ -1,15 +1,26 @@
 [tool.poetry]
-name = "continuous_time_paper"
+name = "masterthesis"
 version = "0.1.0"
 description = ""
-authors = ["Alina Samokhina <alina.samokhina@mipt.ru>"]
+authors = ["Alina-Samokhina <alina.samokhina@phystech.edu>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
-h5py = "^3.6.0"
-pandas = "^1.4.1"
+python = ">=3.8,<3.10"
+torchcde = "^0.2.3"
+nengolib = "^0.5.2"
+torchdyn = "^1.0.1"
+pytorch-lightning = "^1.4.9"
+scikit-learn = "^0.23.2"
 
 [tool.poetry.dev-dependencies]
+numpy = "^1.20.2"
+scipy = "^1.6.2"
+sklearn = "^0.0"
+pandas = "^1.2.3"
+mne = "^0.22.1"
+moabb = "^0.3.0"
+pyriemann = "^0.2.6"
+torch = "^1.8.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

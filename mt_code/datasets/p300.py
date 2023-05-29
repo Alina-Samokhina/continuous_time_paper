@@ -32,7 +32,7 @@ class P300Dataset(Dataset):
         [("eeg", np.object), ("starts", np.object), ("stimuli", np.object)]
     )
 
-    def __init__(self, data_dir='data/demons/nery_demons_dataset', get_data=False):
+    def __init__(self, data_dir=None, get_data=False):
         self.eeg = []
         self.labels = []
 
@@ -133,3 +133,36 @@ class P300Dataset(Dataset):
             ]
         )
         return epochs
+
+    def get_data_for_experiments(self, verbose=False):
+        """
+        Obtains train|test splitted dataset for training alongside with another datasets
+        """
+        all_x, all_y = self.get_data()
+        t = torch.arange(
+            self.start_epoch,
+            self.end_epoch,
+            (self.end_epoch - self.start_epoch)
+            / all_x.size(1),  # (self.end_epoch-self.start_epoch)/all_x.size(1),
+            dtype=torch.float32,
+        )
+        all_t = torch.stack([t] * all_x.size(0))
+
+        total_seqs = all_x.shape[0]
+        permutation = np.random.RandomState(42).permutation(total_seqs)
+        test_size = int(0.3 * total_seqs)
+
+        self.test_x = all_x[permutation[:test_size]]
+        self.test_y = all_y[permutation[:test_size]]
+        self.test_t = all_t[permutation[:test_size]]
+
+        self.train_x = all_x[permutation[test_size:]]
+        self.train_y = all_y[permutation[test_size:]]
+        self.train_t = all_t[permutation[test_size:]]
+
+        self.feature_size = int(self.train_x.shape[-1])
+        if verbose:
+            print("train_x.shape: ", str(self.train_x.shape))
+            print("train_y.shape: ", str(self.train_y.shape))
+            print("Total number of train sequences: {}".format(self.train_x.shape[0]))
+            print("Total number of test  sequences: {}".format(self.test_x.shape[0]))
